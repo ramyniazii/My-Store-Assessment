@@ -4,15 +4,18 @@ import { useParams } from "react-router-dom";
 function ProductDetails() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch(`https://fakestoreapi.com/products/${id}`)
-          .then((res) => res.json())
-          .then((data) => setProduct(data))
-          .catch((err) => console.error("Error fetching products:", err));
+            .then(res => res.json())
+            .then(data => setProduct(data))
+            .catch(() => alert("Error loading product details"))
+            .finally(() => setLoading(false));
     }, [id]);
 
-    if (!product) return <h2>Loading...</h2>;
+    if (loading) return <p>Loading...</p>;
+    if (!product) return <p>Product not found</p>;
 
     return (
         <div>
