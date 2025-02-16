@@ -4,16 +4,24 @@ import { Link } from "react-router-dom";
 function Home() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         fetch("https://fakestoreapi.com/products")
-            .then(res => res.json())
-            .then(data => setProducts(data))
-            .catch(() => alert("Error loading products"))
+            .then((res) => {
+                if (!res.ok) throw new Error("Failed to fetch products");
+                return res.json();
+            })
+            .then(setProducts)
+            .catch((err) => {
+                console.error("Error fetching products:", err);
+                setError(true);
+            })
             .finally(() => setLoading(false));
     }, []);
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <div className="loader"></div>;
+    if (error) return <p>Error loading products. Please try again</p>;
 
     return (
         <div>

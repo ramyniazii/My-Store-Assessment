@@ -5,18 +5,30 @@ function ProductDetails() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         fetch(`https://fakestoreapi.com/products/${id}`)
-            .then(res => res.json())
-            .then(data => setProduct(data))
-            .catch(() => alert("Error loading product details"))
+            .then((res) => {
+                if (!res.ok) throw new Error("Failed to fetch product details");
+                return res.json();
+            })
+            .then((data) => {
+                if (Object.keys(data).length === 0) {
+                    setError(true);
+                } else {
+                    setProduct(data);
+                }    
+            })
+            .catch((err) => {
+                console.error("Error fetching product:", err);
+                setError(true);
+            })
             .finally(() => setLoading(false));
     }, [id]);
 
-    if (loading) return <p>Loading...</p>;
-    if (!product) return <p>Product not found</p>;
-    if (!product || Object.keys(product).length === 0) return <p>Product not found</p>;
+    if (loading) return <div className="loader"></div>;
+    if (error || !product) return <p>Product not found.</p>;
 
     return (
         <div>
