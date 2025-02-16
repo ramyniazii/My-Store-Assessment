@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function ProductDetails() {
     const { id } = useParams();
@@ -16,6 +16,7 @@ function ProductDetails() {
 
     if (loading) return <p>Loading...</p>;
     if (!product) return <p>Product not found</p>;
+    if (!product || Object.keys(product).length === 0) return <p>Product not found</p>;
 
     return (
         <div>
@@ -23,6 +24,7 @@ function ProductDetails() {
             <img src={product.image} alt={product.title} width="200" />
             <p>{product.description}</p>
             <p>Price: ${product.price}</p>
+            <Link to="/">Back to Home</Link>
         </div>
     );
 }
