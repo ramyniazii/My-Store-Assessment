@@ -1,42 +1,180 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Product Grid Layout */
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+  gap: 24px; /* More spacing between products */
+  padding: 20px;
+  justify-content: center;
+}
+
+/* Product Card Styling */
+.product-card {
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 2px 2px 10px rgba(255, 255, 255, 0.15); /* Softer shadow */
+
+  /* ✅ Ensures all cards have the same height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+}
+
+/* Product Image */
+.product-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+
+  /* ✅ Ensures image stays centered */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  /* ✅ Helps maintain uniform image sizes */
+  max-height: 150px; 
+  object-fit: contain;
+}
+
+/* Product Title */
+.product-card h2 {
+  font-size: 16px;
+  color: white;
+  margin-bottom: 10px;
+
+  /* ✅ Keeps all titles the same height */
+  min-height: 3.6em; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Price Styling */
+.product-card p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #00bcd4;
+}
+
+/* Align View Details and Add to Cart buttons */
+.product-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between buttons */
+  align-items: center;
+  margin-top: auto; /* ✅ Pushes buttons to the bottom */
+}
+
+/* Button Styling */
+button {
+  background-color: #00bcd4;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #008ba3;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.search-bar {
+  width: 90%;
+  max-width: 300px;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 25px;
+  border: 2px solid #00bcd4; /* Cool cyan border */
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  background-color: #222;
+  color: white;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.search-bar::placeholder {
+  color: #aaa;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.search-bar:focus {
+  border-color: #ff4081; /* Change color on focus */
+  box-shadow: 0 0 10px #ff4081;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px; /* Increased padding */
+}  
+
+.nav-left h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.nav-center {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.nav-center ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-center ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+.navbar a {
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  background-color: rgba(0, 188, 212, 0.2); /* Subtle glow */
+  border-radius: 5px;
+}
+
+.active-link {
+  border-bottom: 2px solid #00bcd4;
+}
+
+/* Mobile-friendly adjustments */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
   }
-  to {
-    transform: rotate(360deg);
+
+  .nav-center {
+    margin-top: 10px;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .nav-right {
+    margin-top: 10px;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
