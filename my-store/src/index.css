@@ -1,35 +1,32 @@
-/* Global Reset */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif; /* Use a clean, modern font */
+  font-family: 'Poppins', sans-serif;
 }
 
-/* Dark Background for a Chic Look */
+
 body {
-  background-color: #121212; /* Dark mode */
-  color: #ffffff; /* White text for contrast */
+  background-color: #121212;
+  color: #ffffff;
   padding: 20px;
 }
 
-/* Main Container - Centering the content */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Product Grid Layout */
 .product-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   justify-content: center;
   padding: 20px;
 }
 
-/* Links */
 a {
   color: #00bcd4;
   text-decoration: none;

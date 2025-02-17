@@ -14,7 +14,6 @@ function Home() {
     const [searchTerm, setSearchTerm] = useState("");
     const { addToCart } = useContext(CartContext);
 
-    // Fetch products
     useEffect(() => {
         fetch("https://fakestoreapi.com/products")
             .then((res) => {
@@ -32,21 +31,18 @@ function Home() {
             .finally(() => setLoading(false));
     }, []);
 
-    // Fetch product categories
     useEffect(() => {
         fetch("https://fakestoreapi.com/products/categories")
             .then((res) => res.json())
-            .then((data) => setCategories(["all", ...data])) // Add "all" to show all products
+            .then((data) => setCategories(["all", ...data]))
             .catch((err) => console.error("Error fetching categories:", err));
     }, []);
 
-    // Filter products based on category
     const filteredProducts = products.filter((product) =>
         (selectedCategory === "all" || product.category === selectedCategory) &&
         product.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // Handle sorting
     const handleSort = () => {
         const sortedProducts = [...filteredProducts].sort((a, b) => {
             if (sortType === "price") {
